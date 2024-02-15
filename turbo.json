@@ -1,0 +1,67 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
+  "globalEnv": [
+    "DATABASE_URL",
+    "NEXT_PUBLIC_URL",
+    "NEXT_PUBLIC_TENANT_URL",
+    "NEXT_PUBLIC_API_URL",
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY",
+    "NEXT_PUBLIC_CLERK_SIGN_IN_URL",
+    "NEXT_PUBLIC_CLERK_SIGN_UP_URL",
+    "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL",
+    "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL",
+    "NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME",
+    "NEXT_PUBLIC_CRISP_WEBSITE_ID",
+    "NEXT_PUBLIC_KNOCK_PUBLIC_API_KEY",
+    "NEXT_PUBLIC_KNOCK_FEED_CHANNEL_ID",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY",
+    "SKIP_ENV_VALIDATION",
+    "NODE_ENV",
+    "ANALYZE"
+  ],
+  "pipeline": {
+    "build": {
+      "dependsOn": [
+        "^db:generate",
+        "^build"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**"
+      ]
+    },
+    "lint": {
+      "dependsOn": [
+        "^lint"
+      ]
+    },
+    "dev": {
+      "dependsOn": [
+        "^db:generate"
+      ],
+      "cache": false,
+      "persistent": true
+    },
+    "deploy": {
+      "dependsOn": []
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:studio": {
+      "cache": false
+    },
+    "db:pull": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
+    "db:reset": {
+      "cache": false
+    }
+  }
+}
